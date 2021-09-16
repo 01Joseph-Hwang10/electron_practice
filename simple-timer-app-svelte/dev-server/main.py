@@ -4,6 +4,9 @@ import traceback
 from constants import ROOT
 import sys
 from time import sleep
+import shutil
+import os
+# import keyboard
 
 class ConsoleTag:
     info='INFO'
@@ -24,11 +27,12 @@ electron_cmds = 'npm run electron-start'.split()
 electron_process = Popen(electron_cmds, cwd=ROOT)
 
 def shutdown_svelte():
-    svelte_dev.send_signal(signal.SIGTERM)
-    while True:
-        sleep(0.1)
-        if svelte_dev.poll() is None:
-            break
+    # svelte_dev.send_signal(signal.SIGTERM)
+    # while True:
+    #     sleep(0.1)
+    #     if svelte_dev.poll() is None:
+    #         break
+    pass
 
 def start_svelte():
     global svelte_dev
@@ -54,16 +58,25 @@ def restart():
     start_svelte()
     start_electron()
 
+def empty_cache():
+    shutil.rmtree(os.path.join(ROOT, 'public', 'build'))
+    shutil.rmtree(os.path.join(ROOT, 'entry', 'dist'))
+
 try:
     while True:
         next_cmd = sys.stdin.read(1)
-        if next_cmd == "q":
+        if next_cmd == "q": # Quit
             break
-        if next_cmd == "r":
+        if next_cmd == "r": # Soft Reload
             console('Reloading...')
             shutdown_svelte()
             start_svelte()
-        if next_cmd == "R":
+        if next_cmd == "R": # Hard Reload
+            console("Restarting...")
+            restart()
+        if next_cmd == "C": # Hard Reload with empty cache
+            console("Emptying cache...")
+            empty_cache()
             console("Restarting...")
             restart()
 except KeyboardInterrupt:

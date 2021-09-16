@@ -2,7 +2,7 @@
 import svelte from "rollup-plugin-svelte";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import livereload from "rollup-plugin-livereload";
+// import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
@@ -43,13 +43,23 @@ export default {
                     includePaths: ['src'],
                 },
                 postcss: {
-                    plugins: [require('autoprefixer')],
+                    plugins: [
+                        require('tailwindcss'),
+                        require('autoprefixer')
+                    ],
                 },
             }),
             compilerOptions: {
                 // enable run-time checks when not in production
                 dev: !production
-            }
+            },
+            onwarn: (warning, handler) => {
+                const { code, frame } = warning;
+                if (code === "css-unused-selector")
+                    return;
+        
+                handler(warning);
+            },
         }),
         // we'll extract any component CSS out into
         // a separate file - better for performance
@@ -62,7 +72,7 @@ export default {
         // https://github.com/rollup/plugins/tree/master/packages/commonjs
         resolve({
             browser: true,
-            dedupe: ["svelte"]
+            dedupe: ["svelte"],
         }),
         commonjs(),
         typescript({
@@ -76,7 +86,7 @@ export default {
 
         // Watch the `public` directory and refresh the
         // browser on changes when not in production
-        !production && livereload("public"),
+        // !production && livereload("public"),
 
         // If we're building for production (npm run build
         // instead of npm run dev), minify
