@@ -11,7 +11,7 @@
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
     "electron-start": "electron .",
     "electron-dev": "npm run electron-start",
-    "dev": "tsc ./entry/entry.ts --outDir ./entry/dist/ && ./utils/scripts/main.sh",
+    "dev": "tsc ./entry/entry.ts --outDir ./entry/dist/ && ./dev-server/main.sh",
     "build": "npm run svelte-build && electron-builder",
     "release": "npm run svelte-build && electron-builder --publish=always"
   },
