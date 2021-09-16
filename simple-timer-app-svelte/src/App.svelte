@@ -1,5 +1,6 @@
-<script>
-	export let name;
+<script lang="ts">
+export let name: string;
+
 </script>
 
 <main>
@@ -7,7 +8,8 @@
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
 
-<style>
+<style lang="scss">
+	$subject-color: #ff3e00;
 	main {
 		text-align: center;
 		padding: 1em;
@@ -16,7 +18,7 @@
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: $subject-color;
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
