@@ -5,10 +5,13 @@ import * as path from "path";
 
 let mainWindow: BrowserWindow;
 
+const width = 360;
+const height = 0.75 * width;
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 360,
-    height: 240,
+    width,
+    height,
     center: true,
     kiosk: !isDev,
     resizable: false,
@@ -25,7 +28,13 @@ const createWindow = () => {
 
   // production에서는 패키지 내부 리소스에 접근.
   // 개발 중에는 개발 도구에서 호스팅하는 주소에서 로드.
-  const filePath = `file://${path.join(__dirname, "..", "..", "public", "index.html")}`;
+  const filePath = `file://${path.join(
+    __dirname,
+    "..",
+    "..",
+    "public",
+    "index.html"
+  )}`;
   // const url = isDev ? DEV_URL : filePath;
   mainWindow.loadURL(filePath);
 
@@ -52,17 +61,17 @@ app.on("window-all-closed", () => {
   }
 });
 
-app.whenReady().then(() => {  
+app.whenReady().then(() => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 
-  app.on('activate', () => {    
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
 if (isDev) {
   try {
-    require('electron-reloader')(module);
+    require("electron-reloader")(module); // eslint-disable-line
   } catch (error) {
     // pass
   }
