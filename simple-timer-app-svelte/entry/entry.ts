@@ -5,8 +5,8 @@ import * as path from "path";
 
 let mainWindow: BrowserWindow;
 
-const width = 360;
-const height = 0.75 * width;
+const width = 400;
+const height = Math.round((9 / 16) * width);
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({

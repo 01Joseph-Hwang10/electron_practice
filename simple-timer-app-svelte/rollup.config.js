@@ -39,9 +39,6 @@ export default {
     svelte({
       preprocess: sveltePreprocess({
         sourceMap: !production,
-        scss: {
-          includePaths: ["src"],
-        },
         postcss: {
           plugins: [
             require("tailwindcss"), // eslint-disable-line
