@@ -8,14 +8,14 @@
   "scripts": {
     "svelte-build": "rollup -c",
     "svelte-dev": "rollup -c -w",
-    "svelte-silent": "cross-env BROWSER=none DEBUG=true npm run svelte-build",
+    "svelte-silent": "cross-env BROWSER=none DEBUG=true yarn svelte-build",
     "svelte-start": "sirv public --no-clear",
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
     "electron-start": "electron .",
     "electron-source": "tsc ./entry/entry.ts --outDir ./entry/dist/",
     "dev": "./dev-server/main.sh",
-    "build": "npm run svelte-build && electron-builder",
-    "release": "npm run svelte-build && electron-builder --publish=always"
+    "build": "yarn electron-source && yarn svelte-build && electron-builder",
+    "release": "yarn electron-source && yarn svelte-build && electron-builder --publish=always"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
