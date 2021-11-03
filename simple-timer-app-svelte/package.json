@@ -1,8 +1,10 @@
 {
-  "name": "svelte-app",
+  "name": "simple-timer",
+  "description": "Simple Timer",
   "version": "1.0.0",
   "private": true,
   "main": "entry/dist/entry.js",
+  "author": "01Joseph-Hwang10",
   "scripts": {
     "svelte-build": "rollup -c",
     "svelte-dev": "rollup -c -w",
