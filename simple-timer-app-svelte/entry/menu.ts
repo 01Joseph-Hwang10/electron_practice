@@ -17,4 +17,8 @@ const menuTemplate: MenuItemConstructorOptions[] = [
   },
 ];
 
+if (process.platform == "darwin") {
+  menuTemplate.unshift({ label: "" });
+}
+
 export const menu = Menu.buildFromTemplate(menuTemplate);

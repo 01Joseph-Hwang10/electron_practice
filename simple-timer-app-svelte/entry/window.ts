@@ -16,6 +16,7 @@ export const createWindow = (): void => {
     resizable: false,
     fullscreen: false,
     fullscreenable: false,
+    autoHideMenuBar: false,
     webPreferences: {
       // node환경처럼 사용하기
       nodeIntegration: true,
@@ -46,4 +47,7 @@ export const createWindow = (): void => {
   // Emitted when the window is closed.
   mainWindow.on("closed", () => (mainWindow = undefined!));
   mainWindow.focus();
+
+  mainWindow.setMenuBarVisibility(true);
+  mainWindow.setVisibleOnAllWorkspaces(true);
 };
